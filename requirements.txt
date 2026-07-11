@@ -1,2 +1,3 @@
-psd-tools>=1.9
+# [composite] はベクターシェイプ(aggdraw)・グラデーション(scipy)の描画に必須
+psd-tools[composite]>=1.9
 Pillow>=10
