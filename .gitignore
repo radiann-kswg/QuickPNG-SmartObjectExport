@@ -1,0 +1,20 @@
+# 画像アセットはgit管理外（MIT対象外・ドキュメントにも含めない）
+input-PSD/*
+!input-PSD/.gitkeep
+output-PNG/*
+!output-PNG/.gitkeep
+
+# 環境設定
+.env
+
+# Python
+__pycache__/
+*.pyc
+
+# 一時ファイル
+*.tmp
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store
