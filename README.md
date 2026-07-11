@@ -12,7 +12,7 @@ PSDに埋め込まれたスマートオブジェクトを、変形（拡縮・�
 4. 手動実行も可能:
 
    ```bash
-   pip install psd-tools
+   pip install -r requirements.txt
    python3 scripts/extract_smart_objects.py
    ```
 

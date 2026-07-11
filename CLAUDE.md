@@ -20,7 +20,7 @@ MAX_EDGE_PX=512  # 長辺の上限px。超える場合のみアスペクト維�
 ## 実行方法（推奨パイプライン: ローカル psd-tools）
 
 ```bash
-pip install psd-tools --break-system-packages   # 初回のみ
+pip install "psd-tools[composite]" --break-system-packages   # 初回のみ（[composite]必須: aggdraw/scipy）
 python3 scripts/extract_smart_objects.py
 ```
 
