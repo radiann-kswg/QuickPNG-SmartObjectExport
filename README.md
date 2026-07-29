@@ -2,7 +2,10 @@
 
 PSDに埋め込まれたスマートオブジェクトを、変形（拡縮・回転・ワープ）が初期化されたネイティブ状態の透過PNG（350dpiメタデータ・長辺512px以下）へクイック抽出する、Claude（Cowork / Claude Code）向けパイプライン設定。
 
-姉妹リポジトリ: [QuickPNG-To256Permill](https://github.com/radiann-kswg/QuickPNG-To256Permill)（カンバス256‰縮小パッチ）
+姉妹リポジトリ:
+
+- [QuickPNG-To256Permill](https://github.com/radiann-kswg/QuickPNG-To256Permill) — PSDカンバスの256‰縮小PNG出力
+- [QuickPNG-Tinize4Web](https://github.com/radiann-kswg/QuickPNG-Tinize4Web) — Web公開用の高圧縮PNG変換
 
 ## 使い方
 
@@ -13,8 +16,14 @@ PSDに埋め込まれたスマートオブジェクトを、変形（拡縮・�
 
    ```bash
    pip install -r requirements.txt
+   # Cowork のサンドボックスなど PEP 668 管理環境では:
+   #   pip install -r requirements.txt --break-system-packages
    python3 scripts/extract_smart_objects.py
    ```
+
+   `requirements.txt` は `psd-tools[composite]` を指定している。`[composite]` はベクターシェイプ
+   （aggdraw）とグラデーション（scipy）の描画に必須で、省略すると一部のスマートオブジェクトが
+   正しくレンダリングされない。
 
 5. 結果は `output-PNG/<PSDベース名>__<SOレイヤー名>.png` に出力される
 
@@ -30,7 +39,10 @@ PSDに埋め込まれたスマートオブジェクトを、変形（拡縮・�
 
 ```
 CLAUDE.md                         # Claude向けパイプライン定義（本体）
-.env                              # 変換パラメータ（出力dpi・長辺上限px）
+README.md                         # 本ファイル
+.env.example                      # 変換パラメータのテンプレート
+.env                              # 実際の変換パラメータ（git管理外・要作成）
+requirements.txt                  # Python依存（psd-tools[composite] / Pillow）
 scripts/extract_smart_objects.py  # 抽出スクリプト（psd-tools + Pillow）
 input-PSD/                        # 入力（git管理外）
 output-PNG/                       # 出力（git管理外）
@@ -42,6 +54,16 @@ output-PNG/                       # 出力（git管理外）
 | ------------- | ------ | ------------------------------------------ |
 | `OUTPUT_DPI`  | `350`  | 出力PNGへ付与するdpiメタデータ             |
 | `MAX_EDGE_PX` | `512`  | 長辺の上限px。超える場合のみ縮小（拡大なし） |
+
+## 出力の検証
+
+抽出後、全件について次を確認する（詳細は `CLAUDE.md`）。
+
+- PILで開けること（破損の検出）
+- `mode=RGBA`（透過保持）
+- `max(size) <= MAX_EDGE_PX`
+- DPIメタデータ ≈ `OUTPUT_DPI`
+- 出力PNG数 = ユニークなスマートオブジェクト数（重複スキップ数・エラー数はスクリプトが報告）
 
 ## ライセンス
 
