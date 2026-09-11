@@ -25,6 +25,14 @@ PSDに埋め込まれたスマートオブジェクトを、変形（拡縮・�
    （aggdraw）とグラデーション（scipy）の描画に必須で、省略すると一部のスマートオブジェクトが
    正しくレンダリングされない。
 
+   macOS では venv を使う（姉妹リポジトリと並べた親フォルダに共有 `.venv` を作ると使い回せる）:
+
+   ```bash
+   python3 -m venv ../.venv
+   ../.venv/bin/pip install -r requirements.txt
+   ../.venv/bin/python scripts/extract_smart_objects.py
+   ```
+
 5. 結果は `output-PNG/<PSDベース名>__<SOレイヤー名>.png` に出力される
 
 ## 仕様

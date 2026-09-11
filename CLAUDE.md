@@ -24,6 +24,14 @@ pip install "psd-tools[composite]" --break-system-packages   # 初回のみ（[c
 python3 scripts/extract_smart_objects.py
 ```
 
+macOS では venv を使う（姉妹リポジトリと並べた親フォルダに共有 `.venv` を作ると使い回せる）:
+
+```bash
+python3 -m venv ../.venv
+../.venv/bin/pip install -r requirements.txt
+../.venv/bin/python scripts/extract_smart_objects.py
+```
+
 スクリプトが以下を一括で行う:
 
 1. `input-PSD/*.psd` を走査し、スマートオブジェクトレイヤーを再帰的に列挙
