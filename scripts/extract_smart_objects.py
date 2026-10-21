@@ -19,6 +19,7 @@ from __future__ import annotations
 import io
 import re
 import sys
+import subprocess
 from pathlib import Path
 
 from PIL import Image
@@ -124,6 +125,7 @@ def main() -> int:
     print(f"\ndone: {len(written)} PNG / dup-skip {skipped_dup} / error {len(errors)}")
     for e in errors:
         print(f"error: {e}", file=sys.stderr)
+    subprocess.run([sys.executable, str(Path(__file__).with_name("iloveapi_compress.py"))])  # 後段: iLoveAPI 圧縮（.env で有効時のみ）
     return 0 if not errors else 2
 
 
