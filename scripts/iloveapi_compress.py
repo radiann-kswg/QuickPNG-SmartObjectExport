@@ -47,6 +47,7 @@ def load_env() -> dict:
 def req(url: str, headers: dict | None = None, data: dict | None = None,
         multipart: dict | None = None):
     headers = dict(headers or {})
+    headers.setdefault("User-Agent", "QuickPNG/1.0")  # 既定の Python-urllib は Cloudflare(1010) に遮断される
     body = None
     if multipart:
         b = uuid.uuid4().hex
